@@ -1,0 +1,46 @@
+import pandas as pd
+df =pd.read_csv('newfb.csv')
+df
+df.head()
+df.tail()
+df.columns
+
+df.describe()
+df.info()
+
+creating Subsets
+df1=df[['Page total likes','Category']].loc[0:15]
+df1
+df2=df[['Page total likes','Category']].loc[16:25]
+df2
+df3=df[['Page total likes','Category']].loc[31:35]
+df3
+
+merging
+merged=pd.concat([df1,df2,df3])
+merged
+
+sorting
+sort=df.sort_values(by='Page total likes',ascending=False)
+sort
+
+transpose
+df.transpose()
+
+Shape and reshape
+df.shape
+
+melt() — Convert wide format to long format
+melted = pd.melt(df, id_vars=['Category'], value_vars=['Page total likes'])
+print(melted)
+
+# First, create a long-format DataFrame like this:
+df_long = pd.DataFrame({
+    'Category': [1, 1, 2, 2],
+    'Metric': ['likes', 'comments', 'likes', 'comments'],
+    'Value': [1200, 80, 1500, 60]
+})
+
+# Now pivot:
+pivoted = df_long.pivot(index='Category', columns='Metric', values='Value')
+print(pivoted)
