@@ -1,0 +1,65 @@
+hive
+ create database db1;
+ use db1;
+
+  
+  CREATE TABLE flight (
+    flight_no INT,
+    flight_name STRING,
+    origin STRING,
+    destination STRING
+  )
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+ALTER TABLE flight ADD COLUMNS (aircraft_type STRING);
+
+
+CREATE  EXTERNAL TABLE external_flight (
+    flight_no INT,
+    flight_name STRING,
+    origin STRING,
+    destination STRING,
+  )
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+INSERT INTO TABLE flight VALUES 
+(1234, 'IndiGo', 'PUNE', 'BOM');
+
+#createfile gedit p.txt
+(4, 'Ind', 'PUNE', 'BOM');
+
+load data local inpath "p.txt" into table flight;
+
+SELECT * FROM flight;
+
+insert into external_flight SELECT * FROM flight;
+
+SELECT * FROM external_flight;
+
+
+#extra garjecha nahi
+
+CREATE TABLE airline_info (
+    airline STRING,
+    country STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+-- Insert values into airline_info
+INSERT INTO TABLE airline_info VALUES
+('IndiGo', 'India'),
+('Air India', 'India'),
+('Lufthansa', 'Germany');
+
+
+-- Join: get flights with country info
+SELECT f.flight_no, f.flight_name, a.country, f.destination
+FROM flight f
+JOIN airline_info a
+ON f.airline = a.airline;
