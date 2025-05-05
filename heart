@@ -29,6 +29,7 @@ subSet1 = df[['age','cp','chol','thalachh']]
 subSet2 = df[['exng','slp','output']]
 merged_df = subSet1.merge(right=subSet2,how='cross')
 merged_df.head()
+
 #Error Correcting
 df.columns
 def remove_outliers(column):
