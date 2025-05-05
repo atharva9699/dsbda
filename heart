@@ -11,7 +11,7 @@ df.head()
 df.drop_duplicates(inplace=True)
 #Data Intergration
 df.columns
-subset1=df[['age','cp','chol','thalachh']]
+subset1=df[['age','cp','chol','thalach']]
 subset2=df[['exng','slp','output']]
 merged_df=subset1.merge(right=subset2,how='cross')
 merged_df.head()
