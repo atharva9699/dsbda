@@ -1,0 +1,30 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+  
+df=pd.read_csv("dataset_Facebook.csv",sep=";")
+df.head()
+plt.figure(figsize=(6, 4))
+sns.boxplot(x=df['Post Month'])
+plt.title("Box Plot: Lifetime Post Total Reach")
+plt.show()
+  
+plt.figure(figsize=(6, 4))
+sns.histplot(df['Lifetime Post Consumers'], bins=30, kde=True)
+plt.title("Histogram: Lifetime Post Consumers")
+plt.show()
+avg_reach = df.groupby('Post Month')['Lifetime Post Total Reach'].mean()
+
+plt.plot(avg_reach, marker='o')
+plt.title("Avg Reach per Month")
+plt.xlabel("Month")
+plt.ylabel("Reach")
+plt.grid(True)
+plt.show()
+  
+data = df.groupby('Post Month')[['Lifetime Post Total Reach', 'Lifetime Post Total Impressions']].mean()
+data.plot(marker='o', title='Monthly Avg: Reach vs Impressions')
+plt.xlabel('Month')
+plt.ylabel('Average')
+plt.grid(True)
+plt.show()
