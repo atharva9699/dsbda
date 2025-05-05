@@ -1,0 +1,32 @@
+import requests
+import bs4
+request1=requests.get('https://www.flipkart.com/gtplayer-1usa-premium-gaming-chair-ergonomic-design-massager-footrest-360swivel-neck-back-support/p/itm19424a418d868?pid=GACH3WZANCFZYSGZ&lid=LSTGACH3WZANCFZYSGZLXEIS5&marketplace=FLIPKART&store=wwe&srno=b_1_4&otracker=hp_rich_navigation_2_1.navigationCard.RICH_NAVIGATION_Home%2B%26%2BFurniture~Furniture_6O12T1H9D8V3&otracker1=hp_rich_navigation_PINNED_neo%2Fmerchandising_NA_NAV_EXPANDABLE_navigationCard_cc_2_L1_view-all&fm=organic&iid=b35bfb94-3e68-4f7e-be78-0953359e42be.GACH3WZANCFZYSGZ.SEARCH&ppt=None&ppn=None&ssid=g9rkhp78qo0000001746014054217')
+request1
+request1.content
+soup=bs4.BeautifulSoup(request1.text)
+soup
+
+reviews=soup.findAll('div',{'class':'ZmyHeo'});
+for review in reviews:
+    print(review.get_text(), end="\n\n")
+
+ratings=soup.find('div',{'class':'ipqd2A'}).get_text();
+print(ratings)
+
+ind_rat=soup.findAll('div',{'class':'XQDdHH Ga3i8K'});
+for ind in ind_rat:
+    print(ind.get_text() + "\n")
+
+tags=soup.find('span',{'class':'VU-ZEz'}).get_text();
+tags
+
+cust_name=soup.findAll('p',{'class':'_2NsDsF AwS1CA'});
+for cust in cust_name:
+    print(cust.get_text() + '\n');
+
+ques=soup.find_all('div',{'class':'wys2hv _43gOsC'});
+for que in ques:
+    print(que.get_text());
+    answ=que.findNext('div',{'class':'JxAXcP'}).get_text();
+    print(answ + '\n')
+    
